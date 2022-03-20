@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Ventas</title>
+</head>
+<body>
+    <div class="main_container">
+        <h1>Ventas</h1>
+        <form>
+            <label for="nombre">Nombre Vendedor</label><br>
+            <input type="text" id="nombre" name="nombre"><br>
+            <span id="mensnombre" style="color: red;"></span><br>
+            <br>
+            <label for="valorVenta">Valor de la Venta</label><br>
+            <input type="number" id="valorVenta" name="valorVenta"><br>
+            <span id="mensvalorVenta" style="color: red;"></span><br>
+            <br>
+            <label for="salario">Salario del Vendedor</label><br>
+            <input type="number" id="salario" name="salario">
+            <br><br>
+            <label for="zona">Zona de la Venta</label><br>
+            <select name="zona" id="zona">
+                <option value="norte">Norte</option>
+                <option value="sur">Sur</option>
+                <option value="oriente">Oriente</option>
+            </select><br>
+            <label for="valorComision">Valor Comisión</label><br>
+            <span id="valorComision" style="color: red;"></span>
+            <br><br>
+            <label for="total">Total a Pagar</label><br>
+            <span id="total" style="color: red;"></span>
+            <br><br>
+            <button id="btncalcular" type="button">Calcular</button>
+        </form>
+    </div>
+
+    <!-- Codigo JS -->
+    <script>
+        let nombre = document.getElementById('nombre')
+        let valorVenta = document.getElementById('valorVenta')
+        let salario = document.getElementById('salario')
+        let zona = document.getElementById('zona')
+        const mensnombre = document.getElementById('mensnombre')
+        const mensvalorVenta = document.getElementById('mensvalorVenta')
+        let valorComision = document.getElementById('valorComision')
+        let total = document.getElementById('total')
+        let btncalcular = document.getElementById('btncalcular')
+        
+
+        // Eventos del DOM
+        nombre.onfocus = () => {
+            mensnombre.innerHTML = '* Solo se aceptan letras y/o espacios'
+        }
+        nombre.onblur = () => {
+            mensnombre.innerHTML = ''
+        }
+
+        valorVenta.onfocus = () => {
+            mensvalorVenta.innerHTML = '* Debe estar entre 1 millón y 50 millones'
+        }
+        valorVenta.onblur = () => {
+            mensvalorVenta.innerHTML = ''
+        }
+
+        // Promesa
+        /*function principal(){
+            let promesa = new Promise(function(){
+
+                if (zona == 'norte'){
+                    valorComision.innerHTML = ((parseFloat(valorVenta.value) + parseFloat(salario.value)) * 5) / 100
+                }
+                else{
+                    if (zona == 'sur'){
+                    valorComision.innerHTML = ((parseFloat(valorVenta.value) + parseFloat(salario.value)) * 4) / 100
+                    }
+                 else {
+                    valorComision.innerHTML = ((parseFloat(valorVenta.value) + parseFloat(salario.value)) * 3) / 100
+                    }
+                }
+            })
+            return promesa
+        }
+
+        async function secundaria(){
+            let resultado = await principal()
+            console.log(resultado)
+        }
+
+        secundaria()*/
+
+        btncalcular.addEventListener('click',() => {
+            if (zona.value == 'norte'){
+                    valorComision.innerHTML = ((parseFloat(valorVenta.value) + parseFloat(salario.value)) * 5) / 100
+                    total.innerHTML = parseFloat(valorComision.innerHTML) + parseFloat(salario.value)
+            }
+            else{
+                if (zona.value == 'sur'){
+                    valorComision.innerHTML = ((parseFloat(valorVenta.value) + parseFloat(salario.value)) * 4) / 100
+                    total.innerHTML = parseFloat(valorComision.innerHTML) + parseFloat(salario.value)
+                }
+                else {
+                    valorComision.innerHTML = ((parseFloat(valorVenta.value) + parseFloat(salario.value)) * 3) / 100
+                    total.innerHTML = parseFloat(valorComision.innerHTML) + parseFloat(salario.value)
+                }
+            }
+        })
+    </script>
+</body>
+</html>
